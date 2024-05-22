@@ -42,6 +42,8 @@ class AddUserView(CreateView):
                 return JsonResponse({'success': False, 'errors': form.errors})
             else:
                 return self.form_invalid(form)
+            
+    
 
 
 class UserDetailView(DetailView):
@@ -50,8 +52,16 @@ class UserDetailView(DetailView):
     context_object_name = 'user_detail'
 
 
-#return JsonResponse({'success': True, 'user_list_html': user_list_html})
 
+class DeleteUser(DeleteView):
+    model = User
+    success_url = reverse_lazy('web:index')
+    template_name = 'web/confirm-delete.html'
+
+
+
+
+#return JsonResponse({'success': True, 'user_list_html': user_list_html})
 # def post(self, request):
     #     form = self.form_class(request.POST)
     #     if form.is_valid():
